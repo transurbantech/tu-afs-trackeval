@@ -359,12 +359,12 @@ class MotChallenge2DBox(_BaseDataset):
             similarity_scores = similarity_scores[cls_gt_mask, :]
 
             # Filter tracker data for selected class
-            pedestrian_tracker_mask = tracker_classes == cls_id
-            tracker_ids = tracker_ids[pedestrian_tracker_mask]
-            tracker_dets = tracker_dets[pedestrian_tracker_mask]
-            tracker_classes = tracker_classes[pedestrian_tracker_mask]
-            tracker_confidences = tracker_confidences[pedestrian_tracker_mask]
-            similarity_scores = similarity_scores[:, pedestrian_tracker_mask]
+            cls_tracker_mask = tracker_classes == cls_id
+            tracker_ids = tracker_ids[cls_tracker_mask]
+            tracker_dets = tracker_dets[cls_tracker_mask]
+            tracker_classes = tracker_classes[cls_tracker_mask]
+            tracker_confidences = tracker_confidences[cls_tracker_mask]
+            similarity_scores = similarity_scores[:, cls_tracker_mask]
 
             # Evaluation is ONLY valid for pedestrian class
             if len(tracker_classes) > 0 and np.max(tracker_classes) > self.class_name_to_class_id[cls]:
